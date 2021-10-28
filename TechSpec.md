@@ -5,7 +5,6 @@
 - Auction
   - Variables: 
       - Double: buyNowPrice
-      - Pair<String, Integer>: highestBid (the string is the username of the highest bid and the Integer is the amount)
       - String: description
       - String: picture
       - Double: closingTimer (the amt of time left in the auction)
@@ -17,18 +16,19 @@
           - String walletID
           - String balance
       - User seller (the owner of the auction)
+      - Pair<User, Integer>: highestBid (the string is the username of the highest bid and the Integer is the amount)
       
 ###### Methods
 
 - Timer
   - Divide ClosingTimer by blockTiming to estimate the amount of blocks needed to reach that time
   - Get the current block (currentBlock) and stop at block currentBlock + (closingTimer/blockTiming)
-  - Once you stop set isAlive = false
+  - Once you stop call the method finishAuction
 - makeBid(Double amount, User person)
   - Check if the auction is over (isAlive == false), if it is then don't allow a bid
-  - Check if the amount is greater than highestBid
-  - Check if user is not already the highest bidder
-  - Set highestBid to <person.getUsername, amount>
+  - Check if the amount is greater than highestBid, if it isn't then don't allow the bid
+  - Check if amount > person.balance, if it is then don't allow the bid
+  - Set highestBid to <person, amount>
 - pullHighestBid (User person)
   - Check if person's username is equal to highestBid's username
   - add 5 minutes to closingTimer
@@ -36,4 +36,8 @@
 - extendTime (Double addedTime)
   - add addedTime to closingTimer
   - recalculate the Timer method
+- finishAuction
+  - set isAlive = false
+  - take the highestBid, charge the User's wallet ID the amount in highestBid and subtract it from their balance
+  - send the item to the User
 
