@@ -1,26 +1,27 @@
 # AuctionSystem
 ## Tech Spec
 
-###### Objects
-- Auction
-  - Variables: 
-      - Double: buyNowPrice
-      - String: description
-      - String: picture
-      - Double: closingTimer (the amt of time left in the auction)
-      - Double: blockTiming (the time it takes for the chain to make a new block)
-      - Boolean: isAlive (is the auction still going)
-      - CUSTOM CLASS: User
-        - Variables: 
-          - String username
-          - String walletID
-          - String balance
-      - User seller (the owner of the auction)
-      - Pair<User, Integer>: highestBid (the string is the username of the highest bid and the Integer is the amount)
-      
+## User Class
+###### Variables
+- String username
+- String walletID
+- String balance
 ###### Methods
 
-- Timer
+## Auction Class
+###### Variables
+- Double: buyNowPrice
+- String: description
+- String: picture
+- Double: closingTimer (the amt of time left in the auction)
+- Double: blockTiming (the time it takes for the chain to make a new block)
+- Boolean: isAlive (is the auction still going)
+- User seller
+- User seller (the owner of the auction)
+- Pair<User, Integer>: highestBid (the string is the username of the highest bid and the Integer is the amount)
+###### Methods
+
+Timer
   - Divide ClosingTimer by blockTiming to estimate the amount of blocks needed to reach that time
   - Get the current block (currentBlock) and stop at block currentBlock + (closingTimer/blockTiming)
   - Once you stop call the method finishAuction
@@ -40,4 +41,3 @@
   - set isAlive = false
   - take the highestBid, charge the User's wallet ID the amount in highestBid and subtract it from their balance
   - send the item to the User
-
