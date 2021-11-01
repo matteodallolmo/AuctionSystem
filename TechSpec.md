@@ -21,7 +21,7 @@
 - Pair<User, Integer>: highestBid (the string is the username of the highest bid and the Integer is the amount)
 ###### Methods
 
-Timer
+- Timer
   - Divide ClosingTimer by blockTiming to estimate the amount of blocks needed to reach that time
   - Get the current block (currentBlock) and stop at block currentBlock + (closingTimer/blockTiming)
   - Once you stop call the method finishAuction
