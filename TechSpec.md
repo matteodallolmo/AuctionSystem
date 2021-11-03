@@ -16,7 +16,6 @@
 - Double: closingTimer (the amt of time left in the auction)
 - Double: blockTiming (the time it takes for the chain to make a new block)
 - Boolean: isAlive (is the auction still going)
-- User seller
 - User seller (the owner of the auction)
 - Pair<User, Integer>: highestBid (the string is the username of the highest bid and the Integer is the amount)
 ###### Methods
