@@ -4,8 +4,10 @@ public class User{
     private String walletID;
     private Double balance;
 
-    public User(){
-
+    public User(String username, String walletID, Double balance){
+    	this.username = username;
+    	this.walletID = walletID;
+    	this.balance = balance;
     }
 
 	public Double getBalance() {
