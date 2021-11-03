@@ -9,10 +9,11 @@ public class Auction{
 	private Double closingTimer;
 	private boolean isAlive;
 	private User seller; //owner of the Auction
-	private HashMap<User, Double> highestBid; //shuold always stay length 1 dictionary - string is the username of the highest Bid and Integer is the amount
+	private HashMap<User, Double> highestBid; //should always stay length 1 dictionary - string is the username of the highest Bid and Integer is the amount
 
 	public Auction(){
 		//closingTimer = 43200; //30 days worth of minutes
+		isAlive = true;//not really adding timer functionality rn
 
 	}
 	
@@ -40,14 +41,25 @@ public class Auction{
 	}
 
 	public void pullHighestBid (User person){
+		if(person == highestBid.entrySet().iterator().next().getKey()) {
+			highestBid.remove(person);
+		}
+		this.extendTime(5.0);//adds 5 min
 
 	}
 
 	public void extendTime (Double addedTime){
-
+		closingTimer += addedTime;
 	}
 
 	public void finishAuction(){
+		isAlive = false;
+		User winner = highestBid.entrySet().iterator().next().getKey();
+		Double winningAmnt = highestBid.entrySet().iterator().next().getValue();
+
+		winner.setBalance(winner.getBalance() - winningAmnt);
+		
+		System.out.println(winner.getUsername() + " has won this auction with a bid of " + winningAmnt + "");
 
 	}
 

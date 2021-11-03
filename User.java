@@ -31,7 +31,9 @@ public class User{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	public void makeBid(Auction auction, Double amount) {
+		auction.makeBid(amount, this);
+	}
 
 
 }
