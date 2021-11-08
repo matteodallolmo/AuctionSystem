@@ -59,13 +59,21 @@ public class Auction{
 
 	public void finishAuction(){
 		isAlive = false;
-		User winner = highestBid.entrySet().iterator().next().getKey();
-		Double winningAmnt = highestBid.entrySet().iterator().next().getValue();
+		User winner = getHighestBidUser();
+		Double winningAmnt = getHighestBidder();
 
 		winner.setBalance(winner.getBalance() - winningAmnt);
 		
 		System.out.println(winner.getUsername() + " has won this auction with a bid of " + winningAmnt + "");
 
+	}
+	
+	public User getHighestBidUser() {
+		return highestBid.entrySet().iterator().next().getKey();
+	}
+	
+	public Double getHighestBidder() {
+		return highestBid.entrySet().iterator().next().getValue();
 	}
 
 }
