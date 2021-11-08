@@ -30,7 +30,7 @@ public class Auction{
 		if(!isAlive) {
 			System.out.println("bid not allowed");
 		}
-		else if(amount < highestBid.entrySet().iterator().next().getValue()) {
+		else if(amount < getHighestBidAmount()) {
 			System.out.println("bid not allowed");
 		}
 		else if(amount > person.getBalance()) {
@@ -39,14 +39,14 @@ public class Auction{
 		}
 		else {
 			highestBid.put(person, amount);
-			highestBid.remove(highestBid.entrySet().iterator().next().getKey());
+			highestBid.remove(getHighestBidder());
 
 		}
 
 	}
 
 	public void pullHighestBid (User person){ // does not go to the second highest bidder, clears the auction and extends time instead
-		if(person == highestBid.entrySet().iterator().next().getKey()) {
+		if(person == getHighestBidder()) {
 			highestBid.remove(person);
 		}
 		this.extendTime(5.0);//adds 5 min
@@ -59,8 +59,8 @@ public class Auction{
 
 	public void finishAuction(){
 		isAlive = false;
-		User winner = getHighestBidUser();
-		Double winningAmnt = getHighestBidder();
+		User winner = getHighestBidder();
+		Double winningAmnt = getHighestBidAmount();
 
 		winner.setBalance(winner.getBalance() - winningAmnt);
 		
@@ -68,11 +68,11 @@ public class Auction{
 
 	}
 	
-	public User getHighestBidUser() {
+	public User getHighestBidder() {
 		return highestBid.entrySet().iterator().next().getKey();
 	}
 	
-	public Double getHighestBidder() {
+	public Double getHighestBidAmount() {
 		return highestBid.entrySet().iterator().next().getValue();
 	}
 
